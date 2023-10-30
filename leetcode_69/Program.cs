@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace leetcode_69
 {
@@ -13,7 +9,7 @@ namespace leetcode_69
             Console.WriteLine(new Program().MySqrtSolution1(2147395599));
         }
 
- 
+
         public int MySqrtSolution1(int x)
         {
 
@@ -24,19 +20,40 @@ namespace leetcode_69
                 a = (a + x / a) / 2;
             }
 
-            return (int) a;
+            return (int)a;
         }
         public int MySqrtSolution2(int x)
         {
 
-            long a = x;
-            Console.WriteLine(a);
-            while (a * a > x)
+            if (x < 2)
             {
-                a = (a + x / a) / 2;
+                return x;
             }
 
-            return (int)a;
+            int left = 2;
+            int mid = 2;
+            long temp = 2;
+            int right = x / 2;
+
+            while (left <= right)
+            {
+                mid = left + (right - left) / 2;
+                temp = (long)mid * mid;
+                if (temp > x)
+                {
+                    right = mid - 1;
+                }
+                else if (temp < x)
+                {
+                    left = mid + 1;
+                }
+                else
+                {
+                    return mid;
+                }
+
+            }
+            return right;
         }
 
 
